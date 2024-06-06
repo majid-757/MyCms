@@ -61,6 +61,11 @@
     <Compile Include="Models\PageComment.cs" />
     <Compile Include="Models\PageGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IPageCommentRepository.cs" />
+    <Compile Include="Repositories\IPageGroupRepository.cs" />
+    <Compile Include="Repositories\IPageRepository.cs" />
+    <Compile Include="Services\PageGroupRepository.cs" />
+    <Compile Include="Services\PageRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -71,6 +76,7 @@
       <DependentUpon>202406061910083_Initial_Datebase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
