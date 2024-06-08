@@ -9,7 +9,14 @@ namespace DataLayer
 {
     public class PageGroupRepository : IPageGroupRepository
     {
-        private MyCmsContext db = new MyCmsContext();
+
+        private MyCmsContext db;
+
+        public PageGroupRepository(MyCmsContext context)
+        {
+            this.db = context;
+        }
+
         public IEnumerable<PageGroup> GetAllGroups()
         {
             return db.PageGroups;
@@ -46,6 +53,22 @@ namespace DataLayer
             }
         }
 
+
+        public bool DeleteGroup(int groupId)
+        {
+            try
+            {
+                var group = GetGroupById(groupId);
+                DeleteGroup(group);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+
         public bool DeleteGroup(PageGroup pageGroup)
         {
             try
@@ -59,19 +82,7 @@ namespace DataLayer
             }
         }
 
-        public bool DeleteGroup(int groupId)
-        {
-            try
-            {
-                var group = GetGroupById(groupId);
-                DeleteGroup(groupId);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
+
 
 
         public void Save()
@@ -79,6 +90,9 @@ namespace DataLayer
             db.SaveChanges();
         }
 
-
+        public void Dispose()
+        {
+            db.Dispose();
+        }
     }
 }
