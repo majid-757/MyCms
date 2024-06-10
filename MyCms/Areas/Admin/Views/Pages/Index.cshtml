@@ -12,23 +12,20 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.ImageName)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.PageGroup.GroupeTitle)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Title)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ShortDescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Text)
-        </th>
+
+
         <th>
             @Html.DisplayNameFor(model => model.Visit)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImageName)
-        </th>
+
         <th>
             @Html.DisplayNameFor(model => model.ShowInSlider)
         </th>
@@ -38,38 +35,35 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.PageGroup.GroupeTitle)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShortDescription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Text)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Visit)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ImageName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShowInSlider)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreateDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PageID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PageID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PageID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img src="/PageImages/@item.ImageName" class="thumbnail" style="max-width:120px" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PageGroup.GroupeTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Visit)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ShowInSlider)
+            </td>
+            <td>
+                @item.CreateDate.ToShamsi()
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.PageID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.PageID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.PageID })
+            </td>
+        </tr>
+    }
 
 </table>

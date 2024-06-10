@@ -42,6 +42,7 @@ namespace DataLayer
         public bool ShowInSlider { get; set; }
 
         [Display(Name = "تاریخ ایجاد")]
+        [DisplayFormat(DataFormatString = "{0: yyyy/mm/dd}")]
         public DateTime CreateDate { get; set; }
 
 

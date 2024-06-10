@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -61,8 +62,15 @@ namespace MyCms.Areas.Admin.Controllers
             {
                 page.Visit = 0;
                 page.CreateDate = DateTime.Now;
-                db.Pages.Add(page);
-                db.SaveChanges();
+
+                if (imgUp != null)
+                {
+                    page.ImageName = Guid.NewGuid() + Path.GetExtension(imgUp.FileName);
+                    imgUp.SaveAs(Server.MapPath("/PageImages/" + page.ImageName));
+                }
+
+                pageRepository.InsertPage(page);
+                pageRepository.Save();
                 return RedirectToAction("Index");
             }
 
@@ -77,12 +85,13 @@ namespace MyCms.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Page page = db.Pages.Find(id);
+
+            Page page = pageRepository.GetPageById(id.Value);
             if (page == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.GroupeID = new SelectList(db.PageGroups, "GroupeID", "GroupeTitle", page.GroupeID);
+            ViewBag.GroupeID = new SelectList(pageGroupRepository.GetAllGroups(), "GroupeID", "GroupeTitle", page.GroupeID);
             return View(page);
         }
 
@@ -91,12 +100,24 @@ namespace MyCms.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PageID,GroupeID,Title,ShortDescription,Text,Visit,ImageName,ShowInSlider,CreateDate")] Page page)
+        public ActionResult Edit([Bind(Include = "PageID,GroupeID,Title,ShortDescription,Text,Visit,ImageName,ShowInSlider,CreateDate")] Page page, HttpPostedFileBase imgUp)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(page).State = EntityState.Modified;
-                db.SaveChanges();
+
+                if (imgUp != null)
+                {
+                    if (page.ImageName !=null)
+                    {
+                        System.IO.File.Delete(Server.MapPath("/PageImages/" + page.ImageName));
+                    }
+
+                    page.ImageName = Guid.NewGuid() + Path.GetExtension(imgUp.FileName);
+                    imgUp.SaveAs(Server.MapPath("/PageImages/" + page.ImageName));
+                }
+
+                pageRepository.UpdatePage(page);
+                pageRepository.Save();
                 return RedirectToAction("Index");
             }
             ViewBag.GroupeID = new SelectList(db.PageGroups, "GroupeID", "GroupeTitle", page.GroupeID);
@@ -110,7 +131,8 @@ namespace MyCms.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Page page = db.Pages.Find(id);
+
+            Page page = pageRepository.GetPageById(id.Value);
             if (page == null)
             {
                 return HttpNotFound();
@@ -123,9 +145,14 @@ namespace MyCms.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Page page = db.Pages.Find(id);
-            db.Pages.Remove(page);
-            db.SaveChanges();
+            var page = pageRepository.GetPageById(id);
+            if (page.ImageName != null)
+            {
+                System.IO.File.Delete(Server.MapPath("/PageImages/" + page.ImageName));
+            }
+
+            pageRepository.DeletePage(page);
+            pageRepository.Save();
             return RedirectToAction("Index");
         }
 
@@ -133,7 +160,10 @@ namespace MyCms.Areas.Admin.Controllers
         {
             if (disposing)
             {
+                pageGroupRepository.Dispose();
+                pageRepository.Dispose();
                 db.Dispose();
+
             }
             base.Dispose(disposing);
         }
