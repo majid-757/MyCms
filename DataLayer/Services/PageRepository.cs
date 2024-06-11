@@ -91,5 +91,15 @@ namespace DataLayer
         {
             db.Dispose();
         }
+
+        public IEnumerable<Page> TopNews(int take = 4)
+        {
+            return db.Pages.OrderByDescending(p => p.Visit).Take(take);
+        }
+
+        public IEnumerable<Page> PagesInSlider()
+        {
+            return db.Pages.Where(p => p.ShowInSlider == true);
+        }
     }
 }
