@@ -18,5 +18,7 @@ namespace DataLayer
 
         IEnumerable<Page> TopNews(int take = 4);
         IEnumerable<Page> PagesInSlider();
+        IEnumerable<Page> LatestNews(int take = 4);
+        IEnumerable<Page> ShowPageByGroupId(int groupId);
     }
 }

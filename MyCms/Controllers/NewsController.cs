@@ -34,5 +34,24 @@ namespace MyCms.Controllers
         {
             return PartialView(pageRepository.TopNews());
         }
+
+
+        public ActionResult LatestNews()
+        {
+            return PartialView(pageRepository.LatestNews());
+        }
+
+        [Route("Archive")]
+        public ActionResult ArchiveNews()
+        {
+            return View(pageRepository.GetAllPage());
+        }
+
+        [Route("Group/{id}/{title}")]
+        public ActionResult ShowNewsByGroupId(int id, string title)
+        {
+            ViewBag.name = title;
+            return View(pageRepository.ShowPageByGroupId(id));
+        }
     }
 }

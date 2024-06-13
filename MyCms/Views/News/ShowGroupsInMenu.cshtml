@@ -4,7 +4,7 @@
 	
     @foreach (var item in Model)
     {
-	    <li><a href="">@item.GroupeTitle</a></li>
+	    <li><a href="/Group/@item.GroupeID/@item.GroupeTitle">@item.GroupeTitle</a></li>
     }
 
 </ul>
