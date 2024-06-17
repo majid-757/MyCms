@@ -60,17 +60,25 @@
     <Compile Include="Migrations\202406161834561_Add_Tags_Name.designer.cs">
       <DependentUpon>202406161834561_Add_Tags_Name.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202406172007020_Add_AdminLogins.cs" />
+    <Compile Include="Migrations\202406172007020_Add_AdminLogins.designer.cs">
+      <DependentUpon>202406172007020_Add_AdminLogins.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AdminLogin.cs" />
     <Compile Include="Models\Page.cs" />
     <Compile Include="Models\PageComment.cs" />
     <Compile Include="Models\PageGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ILoginRepository.cs" />
     <Compile Include="Repositories\IPageCommentRepository.cs" />
     <Compile Include="Repositories\IPageGroupRepository.cs" />
     <Compile Include="Repositories\IPageRepository.cs" />
+    <Compile Include="Services\LoginRepository.cs" />
     <Compile Include="Services\PageCommentRepository.cs" />
     <Compile Include="Services\PageGroupRepository.cs" />
     <Compile Include="Services\PageRepository.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\ShowGroupViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -83,6 +91,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202406161834561_Add_Tags_Name.resx">
       <DependentUpon>202406161834561_Add_Tags_Name.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202406172007020_Add_AdminLogins.resx">
+      <DependentUpon>202406172007020_Add_AdminLogins.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
