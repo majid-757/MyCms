@@ -1,13 +1,11 @@
 ﻿@model IEnumerable<DataLayer.Page>
 
-@{
-    ViewBag.Title = "ArchiveNews";
-}
+
 
 
 
 <section class="last-news-section border-radius margin-top-60">
-	<header><i class="icons icon-doc-2"></i>  <h3>آرشیو خبرها</h3> </header>
+	<header><i class="icons icon-doc-2"></i>  <h3>تعداد "@Model.Count()" با عبارت "@ViewBag.Name" یافت شد.</h3> </header>
 
 	<ul>
 

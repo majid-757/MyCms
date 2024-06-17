@@ -46,6 +46,8 @@ namespace DataLayer
         public DateTime CreateDate { get; set; }
 
 
+        [Display(Name = "کلمات کلیدی")]
+        public string Tags { get; set; }
 
         public virtual PageGroup PageGroup { get; set; }
         public virtual List<PageComment> PageComments { get; set; }

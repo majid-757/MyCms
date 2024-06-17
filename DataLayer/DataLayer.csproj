@@ -56,6 +56,10 @@
     <Compile Include="Migrations\202406061910083_Initial_Datebase.designer.cs">
       <DependentUpon>202406061910083_Initial_Datebase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202406161834561_Add_Tags_Name.cs" />
+    <Compile Include="Migrations\202406161834561_Add_Tags_Name.designer.cs">
+      <DependentUpon>202406161834561_Add_Tags_Name.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Page.cs" />
     <Compile Include="Models\PageComment.cs" />
@@ -64,6 +68,7 @@
     <Compile Include="Repositories\IPageCommentRepository.cs" />
     <Compile Include="Repositories\IPageGroupRepository.cs" />
     <Compile Include="Repositories\IPageRepository.cs" />
+    <Compile Include="Services\PageCommentRepository.cs" />
     <Compile Include="Services\PageGroupRepository.cs" />
     <Compile Include="Services\PageRepository.cs" />
     <Compile Include="ViewModels\ShowGroupViewModel.cs" />
@@ -75,6 +80,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202406061910083_Initial_Datebase.resx">
       <DependentUpon>202406061910083_Initial_Datebase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202406161834561_Add_Tags_Name.resx">
+      <DependentUpon>202406161834561_Add_Tags_Name.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

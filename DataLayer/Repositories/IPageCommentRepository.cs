@@ -8,6 +8,7 @@ namespace DataLayer
 {
     public interface IPageCommentRepository
     {
-
+        IEnumerable<PageComment> GetCommentByNewsId(int pageId);
+        bool AddComment(PageComment comment);
     }
 }
